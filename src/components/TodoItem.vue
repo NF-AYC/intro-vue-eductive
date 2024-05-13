@@ -1,5 +1,5 @@
 <template>
-  <div @click="toggleTodo">
+  <div @click="toggleTodo" class="todo-item" :class="{ completed: todo.completed }">
     <h3>{{ todo.title }}</h3>
     <p>{{ todo.completed ? 'Terminé' : 'non terminé' }}</p>
   </div>
@@ -18,6 +18,12 @@ function toggleTodo() {
   emits('update:completed', !props.todo.completed)
 }
 </script>
-<stle scoped>
+<style scoped>
+.todo-item {
+  color: orange;
+}
 
-</stle>
+.completed {
+  color: green;
+}
+</style>
