@@ -2,6 +2,20 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+## Création d'un projet vue
+
+[doc](https://vuejs.org/guide/quick-start.html#creating-a-vue-application)
+
+```sh
+npm create vue@latest
+```
+
+## Lancement du serveur de développement
+
+```sh
+npm run dev
+```
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
