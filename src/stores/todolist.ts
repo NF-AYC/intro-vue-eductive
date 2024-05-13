@@ -2,6 +2,8 @@ import { ref, computed, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Todo } from '@/models/Todo'
 
+import axiosInstance from '@/modules/axios'
+
 export const useTodoListStore = defineStore('todoList', () => {
   const todoList: Ref<Todo[]> = ref([])
   const remainingTodo = computed(filterRemainingTodo)
@@ -11,10 +13,19 @@ export const useTodoListStore = defineStore('todoList', () => {
   }
 
   function addTodo(todo: Todo): void {
-    if (todo.id === undefined) {
-      todo.id = lastTodoId() + 1
-    }
-    todoList.value.push(todo)
+    // if (todo.id === undefined) {
+    //   todo.id = lastTodoId() + 1
+    // }
+    axiosInstance
+      .post<Todo>('/todos', todo)
+      .then((response) => {
+        console.log(import.meta.env.VITE_API_URL)
+        console.log(response.data)
+        todoList.value.push(response.data)
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
   }
 
   /***
