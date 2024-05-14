@@ -9,10 +9,11 @@
 <script setup lang="ts">
 import axiosInstance from '@/modules/axios'
 import { type Ref, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const email: Ref<string> = ref('test@example.com')
 const password: Ref<string> = ref('password')
-
+const router = useRouter()
 function login() {
   axiosInstance
     .get('/sanctum/csrf-cookie')
@@ -22,6 +23,7 @@ function login() {
         .post('/login', { email: email.value, password: password.value })
         .then((result) => {
           console.log('Connexion réussie')
+          router.push('/todos')
         })
         .catch((err) => {
           console.log('invalid credential')

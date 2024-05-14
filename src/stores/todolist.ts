@@ -53,10 +53,17 @@ export const useTodoListStore = defineStore('todoList', () => {
 
   function manageToggle(completed: boolean, todo: Todo) {
     console.log('Le composant enfant modifie le todo ' + todo.title)
-    const t = todoList.value.find((item: Todo) => item.id === todo.id)
-    if (t) {
-      t.completed = completed
-    }
+    axiosInstance
+      .put<Todo>(`/todos/${todo.id}`)
+      .then((response) => {
+        const t = todoList.value.find((item: Todo) => item.id === response.data.id)
+        if (t) {
+          t.completed = completed
+        }
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
   }
 
   return {

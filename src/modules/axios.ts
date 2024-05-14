@@ -5,5 +5,6 @@ const axiosInstance = axios.create({
   timeout: 1000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
 })
-
+axiosInstance.defaults.withCredentials = true
+axiosInstance.defaults.withXSRFToken = true
 export default axiosInstance
